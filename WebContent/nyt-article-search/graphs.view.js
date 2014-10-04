@@ -16,14 +16,10 @@ sap.ui.jsview("nyt-article-search.graphs", {
 		
 		var lay1 = new sap.ui.commons.layout.HorizontalLayout();
 		
-//		lay1.addContent(new sap.ui.commons.TextField({
-//			text: "Hello",
-//		}));
-//		
-		
 		var graph_title = sap.viz.ui5.types.Title("title", 
 				{
 					text: "Pie Graph",
+					visible: true,
 				});
 		
 		
@@ -53,16 +49,8 @@ sap.ui.jsview("nyt-article-search.graphs", {
 						}							
 							
 				});
-		var column = new sap.viz.ui5.Column("col",
-				{
-					title: graph_title,
-					width : "800px",
-					height : "400px",
-					// plotArea : { },
-					dataset: dat,
-				});
 		
-		var pie1 =  new sap.viz.ui5.Pie("pie2", 
+		var pie =  new sap.viz.ui5.Pie("pie", 
 				{
 					title: graph_title,
 			         width : "800px",
@@ -72,67 +60,13 @@ sap.ui.jsview("nyt-article-search.graphs", {
 				});
 		
 		
-		column.setModel(example2);
-		pie1.setModel(example2);
+		
+		pie.setModel(example2);
 		
 		
-//		var hello = new sap.ui.commons.TextView({
-//			id: "id", // sap.ui.core.ID
-//			text: 'Hello', // string
-//		});
-		
-		lay1.addContent(column);
-		lay1.addContent(pie1);
+		lay1.addContent(pie);
 		
 		return lay1; 
 	}
 
 });
-
-
-
-
-
-//if (key == "wi_home_pie") {
-//
-//    var dataset = new sap.viz.ui5.data.FlattenedDataset({
-//
-//      dimensions : [ {
-//        axis : 1,
-//        name : 'Country',
-//        value : "{Country}"
-//      } ],
-//
-//      measures : [ {
-//        name : 'Revenue',
-//        value : { path : 'revenue', formatter : function($) { return 2*$; }}
-//      } ],
-//
-//      data : {
-//        path : "/businessData",
-//        factory : function() {
-//        }
-//      }
-//
-//    });
-//
-//    var pie = new sap.viz.ui5.Pie({
-//      width : "80%",
-//      height : "400px",
-//      plotArea : {
-//      //'colorPalette' : d3.scale.category20().range()
-//      },
-//      /*
-//      title : {
-//        visible : true,
-//        text : 'Revenue By Country'
-//      },*/
-//      dataset : dataset
-//    });
-//
-//    // alternative way of setting configuration 
-//    pie.getTitle().setVisible(true).setText("Revenue By Country");
-//
-//    mContent[key] = pie;
-//
-//  } 
