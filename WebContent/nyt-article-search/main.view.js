@@ -23,7 +23,7 @@ sap.ui.jsview("nyt-article-search.main", {
 		
 		this.createHeader(oController);
 		
-		this.createParameters(oController);
+		this.embedSidebar(oController);
 		
 		this.createResults(oController);
 		
@@ -49,9 +49,9 @@ sap.ui.jsview("nyt-article-search.main", {
 		
 		this.lay_content = new sap.ui.commons.layout.HorizontalLayout("layout_content");
 		
-		this.lay_parameters = new sap.ui.commons.layout.VerticalLayout("layout_parameters");
+		// this.lay_parameters = new sap.ui.commons.layout.VerticalLayout("layout_parameters");
 		
-		this.lay_parameter_graphs = new sap.ui.commons.layout.VerticalLayout("layout_parameters_graphs");
+		// this.lay_parameter_graphs = new sap.ui.commons.layout.VerticalLayout("layout_parameters_graphs");
 		
 		this.lay_results = new sap.ui.commons.layout.VerticalLayout("layout_results");
 
@@ -78,133 +78,6 @@ sap.ui.jsview("nyt-article-search.main", {
 	},
 
 
-	createParameters: function(oController){
-				
-		// Parameter bar
-		
-		this.pan_parameters = new sap.ui.commons.Panel("pan_parameters", 
-				{
-					text: "Search Parameters"
-				});
-		
-		// Query term
-		
-		this.lab_query = new sap.ui.commons.Label("lab_query", 
-				{
-					text: "Seach Term",
-					labelFor: "txf_query"
-				}
-		);
-		
-		// Search field
-		
-		this.txf_query = new sap.ui.commons.TextField("txf_query", {
-			value: "",
-			maxLength: 30,
-			// liveChange: TODO: why not create an "instant New york times"?
-		});
-		
-		
-		// Date pickers (begin/end date)
-		
-		this.lab_begin_date = new sap.ui.commons.Label("lab_begin_date", 
-				{
-					text: "Begin Date",
-					labelFor: "dtp_begin_date"
-				}
-		);
-		
-		this.dtp_begin_date = new sap.ui.commons.DatePicker("dtp_begin_date", 
-				{
-					yyyymmdd: "18510918"
-				});
-		
-		
-		this.lab_end_date = new sap.ui.commons.Label("lab_end_date", 
-				{
-					text: "End Date",
-					labelFor: "dtp_end_date"
-				}
-		);
-		
-		this.dtp_end_date = new sap.ui.commons.DatePicker("dtp_end_date", 
-				{
-					yyyymmdd: "20141231"
-				});
-		
-		
-		// Sort
-		
-		this.lab_sort = new sap.ui.commons.Label("lab_sort", 
-				{
-					text: "Sort",
-					labelFor: "cob_sort"
-				}
-		);
-		
-		this.lsi_sort_newest = new sap.ui.core.ListItem("lsi_sort_newest");
-		this.lsi_sort_newest.setText("Newest");
-		this.lsi_sort_newest.setKey("newest");
-		
-
-		this.lsi_sort_oldest = new sap.ui.core.ListItem("lsi_sort_oldest");
-		this.lsi_sort_oldest.setText("Oldest");
-		this.lsi_sort_oldest.setKey("oldest");
-		
-		this.cob_sort = new sap.ui.commons.ComboBox("cob_sort",
-				{
-					selectedKey: this.lsi_sort_newest.getKey(),
-					items: [ this.lsi_sort_oldest, this.lsi_sort_newest ]
-				});
-		
-		// show graphs
-		this.pan_facet_graph = new sap.ui.commons.Panel("pan_facet_graph", 
-				{
-					text: "Graphs Options"
-				});
-		
-		this.chk_facet_show_graphs = new sap.ui.commons.CheckBox("chk_facet_show_graphs", 
-				{
-					selected: true,
-					name: "chk_facet_show_graphs",
-					text: "Show Graphs"
-				});
-		
-		this.chk_facet_filter = new sap.ui.commons.CheckBox("chk_facet_filter", 
-				{
-					selected: true,
-					name: "chk_facet_filter",
-					text: "Graphs based on filter"
-				});
-		
-		
-		// api-key
-		
-		this.lab_api_key = new sap.ui.commons.Label("lab_api_key", 
-				{
-					text: "API-Key",
-					labelFor: "txf_api_key"
-				}
-		);
-		
-		this.txf_api_key = new sap.ui.commons.TextField("txf_api_key", 
-				{
-					value: "9753c12656e96dca754d7b875494dc9c:14:68901588",
-					required: true,
-					editable: false
-				});
-		
-		
-		this.but_search = new sap.ui.commons.Button("but_search", 
-				{
-					text: "Search Articles"
-				});
-		
-		
-		
-		
-	},
-	
 	createResults: function(oController){
 
 		// table - search results
@@ -324,36 +197,9 @@ sap.ui.jsview("nyt-article-search.main", {
 		this.lay_all.addContent(this.txv_title);
 		this.lay_all.addContent(this.lay_content);
 		
-		this.lay_content.addContent(this.pan_parameters);
-		this.lay_content.addContent(this.pan_facet_graph);
-		
-		this.pan_parameters.addContent(this.lay_parameters);
-		
-		this.lay_parameters.addContent(this.lab_query);
-		this.lay_parameters.addContent(this.txf_query);
-		
-		this.lay_parameters.addContent(this.lab_begin_date);
-		this.lay_parameters.addContent(this.dtp_begin_date);
-		
-		this.lay_parameters.addContent(this.lab_end_date);
-		this.lay_parameters.addContent(this.dtp_end_date);
-
-		this.lay_parameters.addContent(this.lab_sort);
-		this.lay_parameters.addContent(this.cob_sort);
-		
-		this.lay_parameters.addContent(this.lab_api_key);
-		this.lay_parameters.addContent(this.txf_api_key);
-
-		
-		this.pan_facet_graph.addContent(this.lay_parameter_graphs);
-		
-		this.lay_parameter_graphs.addContent(this.chk_facet_show_graphs);
-		this.lay_parameter_graphs.addContent(this.chk_facet_filter);
-		
-		this.lay_parameters.addContent(this.but_search);
-		
+		this.lay_content.addContent(this.view_sidebar);
 		this.lay_content.addContent(this.lay_results);
-		
+	
 		this.lay_results.addContent(this.lay_results_table);
 		
 		this.lay_results_table.addContent(this.tab_articles);
@@ -369,14 +215,11 @@ sap.ui.jsview("nyt-article-search.main", {
 	
 	defineBindings: function(oController){
 // Table rows
-		
 		this.tab_articles.bindRows("/response/docs");
-		
 	},
 	
 	
 	attachEvents: function(oController){
-		this.but_search.attachPress(null, oController.onSearch, oController);
 		this.pag_page_number.attachPage(null, oController.onPage, oController);
 	},
 	
@@ -385,7 +228,11 @@ sap.ui.jsview("nyt-article-search.main", {
 		 sap.ui.localResources("nyt-article-search");
 		 var view_hello = sap.ui.view({id:"graph", viewName:"nyt-article-search.graphs", type:sap.ui.core.mvc.ViewType.JS});
 		 view_hello.placeAt(this.lay_graphs);
-	}
+	},
 	
+	embedSidebar: function(oController){
+		 sap.ui.localResources("nyt-article-search");
+		 this.view_sidebar = sap.ui.view({id:"sidebar", viewName:"nyt-article-search.sidebar", type:sap.ui.core.mvc.ViewType.JS});
+	}
 	
 });

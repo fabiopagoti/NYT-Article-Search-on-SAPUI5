@@ -63,23 +63,6 @@ sap.ui.controller("nyt-article-search.main", {
 	// }
 
 	
-	/*
-	 * User actions
-	 */
-	
-	onSearch: function(_abc){
-		this.url_generator.q = this.getView().txf_query.getValue();
-		this.url_generator.begin_date = this.getView().dtp_begin_date.getYyyymmdd();;
-		this.url_generator.end_date = this.getView().dtp_end_date.getYyyymmdd();;
-		this.url_generator.sort = this.getView().cob_sort.getSelectedKey();
-		
-		this.buildGraphs();
-		this.resetPaginator();
-		
-		this.refreshArticlesModel();
-		
-	},
-
 	onPage: function(oControlEvent){
 		this.url_generator.page = this.getView().pag_page_number.getCurrentPage() - 1; // page on API starts with zero		
 		this.refreshArticlesModel();
