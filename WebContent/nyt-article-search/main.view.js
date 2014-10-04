@@ -50,7 +50,7 @@ sap.ui.jsview("nyt-article-search.main", {
 		this.lay_content = new sap.ui.commons.layout.HorizontalLayout("layout_content");
 		
 		this.lay_parameters = new sap.ui.commons.layout.VerticalLayout("layout_parameters");
-
+		
 		this.lay_parameter_graphs = new sap.ui.commons.layout.VerticalLayout("layout_parameters_graphs");
 		
 		this.lay_results = new sap.ui.commons.layout.VerticalLayout("layout_results");
@@ -81,6 +81,11 @@ sap.ui.jsview("nyt-article-search.main", {
 	createParameters: function(oController){
 				
 		// Parameter bar
+		
+		this.pan_parameters = new sap.ui.commons.Panel("pan_parameters", 
+				{
+					text: "Search Parameters"
+				});
 		
 		// Query term
 		
@@ -319,7 +324,10 @@ sap.ui.jsview("nyt-article-search.main", {
 		this.lay_all.addContent(this.txv_title);
 		this.lay_all.addContent(this.lay_content);
 		
-		this.lay_content.addContent(this.lay_parameters);
+		this.lay_content.addContent(this.pan_parameters);
+		this.lay_content.addContent(this.pan_facet_graph);
+		
+		this.pan_parameters.addContent(this.lay_parameters);
 		
 		this.lay_parameters.addContent(this.lab_query);
 		this.lay_parameters.addContent(this.txf_query);
@@ -336,7 +344,6 @@ sap.ui.jsview("nyt-article-search.main", {
 		this.lay_parameters.addContent(this.lab_api_key);
 		this.lay_parameters.addContent(this.txf_api_key);
 
-		this.lay_parameters.addContent(this.pan_facet_graph);
 		
 		this.pan_facet_graph.addContent(this.lay_parameter_graphs);
 		
