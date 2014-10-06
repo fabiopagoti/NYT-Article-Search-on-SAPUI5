@@ -21,7 +21,7 @@ sap.ui.jsview("nyt-article-search.graphs", {
 	createContent : function(oController) {
 
 		var lay_graphs = new sap.ui.commons.layout.VerticalLayout("lay_graphs");
-		
+
 		var lay_options = new sap.ui.commons.layout.HorizontalLayout();
 
 		var lab_facet = new sap.ui.commons.Label("lab_facet", {
@@ -30,9 +30,12 @@ sap.ui.jsview("nyt-article-search.graphs", {
 		});
 
 		var cob_facet = new sap.ui.commons.ComboBox("cob_facet", {
-			selectedKey : "secion_name",
+			selectedKey : "section_name",
 
-			items : [ new sap.ui.core.ListItem("lsi_facet_section_name", {
+			items : [
+
+			// list items 
+			new sap.ui.core.ListItem("lsi_facet_section_name", {
 				text : "Section Name",
 				key : "section_name",
 			}),
@@ -55,13 +58,19 @@ sap.ui.jsview("nyt-article-search.graphs", {
 			new sap.ui.core.ListItem("lsi_facet_source", {
 				text : "Source",
 				key : "source",
-			}), new sap.ui.core.ListItem("lsi_facet_day_of_week", {
+			}),
+
+			new sap.ui.core.ListItem("lsi_facet_day_of_week", {
 				text : "Day of Week",
 				key : "day_of_week",
-			}), new sap.ui.core.ListItem("lsi_facet_pub_year", {
+			}),
+
+			new sap.ui.core.ListItem("lsi_facet_pub_year", {
 				text : "Pub Year",
 				key : "pub_year",
-			}), new sap.ui.core.ListItem("lsi_facet_pub_month", {
+			}),
+
+			new sap.ui.core.ListItem("lsi_facet_pub_month", {
 				text : "Pub Month",
 				key : "pub_month",
 			}),
@@ -75,37 +84,10 @@ sap.ui.jsview("nyt-article-search.graphs", {
 			visible : true,
 		});
 
-		var dat = new sap.viz.ui5.data.FlattenedDataset("dat", {
 
-			dimensions : [ new sap.viz.ui5.data.DimensionDefinition({
-				axis : 1,
-				value : "{term}",
-				name : "Term",
-			}) ],
-
-			measures : [ new sap.viz.ui5.data.MeasureDefinition({
-				value : "{count}",
-				name : "Count",
-			}) ],
-
-			data : {
-				path : "/response/facets/day_of_week/terms",
-				factory : function() {
-				}
-
-			}
-
-		});
-
-		var pie = new sap.viz.ui5.Pie("pie", {
+		var pie = new sap.viz.ui5.Pie("graph_facet", {
 			title : graph_title,
-			width : "800px",
-			height : "400px",
-			// plotArea : { },
-			dataset : dat,
 		});
-
-		pie.setModel(NYT_Article_Search_app.articlesModel);
 
 		lay_graphs.addContent(lay_options);
 		lay_graphs.addContent(pie);
