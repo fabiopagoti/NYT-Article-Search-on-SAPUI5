@@ -48,10 +48,6 @@ sap.ui.jsview("nyt-article-search.main", {
 		
 		this.lay_content = new sap.ui.commons.layout.HorizontalLayout("layout_content");
 		
-		// this.lay_parameters = new sap.ui.commons.layout.VerticalLayout("layout_parameters");
-		
-		// this.lay_parameter_graphs = new sap.ui.commons.layout.VerticalLayout("layout_parameters_graphs");
-		
 		this.lay_results = new sap.ui.commons.layout.VerticalLayout("layout_results");
 
 		this.lay_results_table = new sap.ui.commons.layout.VerticalLayout("layout_results_table");
@@ -209,7 +205,7 @@ sap.ui.jsview("nyt-article-search.main", {
 		
 		this.lay_results.addContent(this.lay_results_article);
 		
-		this.lay_results.addContent(this.lay_graphs);
+		this.lay_results.addContent(this.view_graphs);
 	},
 	
 	defineBindings: function(oController){
@@ -223,10 +219,8 @@ sap.ui.jsview("nyt-article-search.main", {
 	},
 	
 	embedGraphView: function(oController){
-		 //debugger;
 		 sap.ui.localResources("nyt-article-search");
-		 var view_hello = sap.ui.view({id:"graph", viewName:"nyt-article-search.graphs", type:sap.ui.core.mvc.ViewType.JS});
-		 view_hello.placeAt(this.lay_graphs);
+		 this.view_graphs = sap.ui.view({id:"graph", viewName:"nyt-article-search.graphs", type:sap.ui.core.mvc.ViewType.JS});
 	},
 	
 	embedSidebar: function(oController){

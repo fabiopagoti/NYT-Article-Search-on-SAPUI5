@@ -35,7 +35,7 @@ sap.ui.jsview("nyt-article-search.sidebar", {
 	createLayouts: function(oController){
 		this.lay_sidebar = new sap.ui.commons.layout.VerticalLayout("lay_sidebar");
 		this.lay_parameters = new sap.ui.commons.layout.VerticalLayout("lay_parameters");
-		this.lay_graphs = new sap.ui.commons.layout.VerticalLayout("lay_graphs");
+		this.lay_options_graphs = new sap.ui.commons.layout.VerticalLayout("lay_options_graphs");
 	},
 	
 	createPanels: function(oController){
@@ -196,10 +196,10 @@ sap.ui.jsview("nyt-article-search.sidebar", {
 		this.lay_parameters.addContent(this.lab_api_key);
 		this.lay_parameters.addContent(this.txf_api_key);
 
-		this.pan_facet_graph.addContent(this.lay_graphs);
+		this.pan_facet_graph.addContent(this.lay_options_graphs);
 		
-		this.lay_graphs.addContent(this.chk_facet_show_graphs);
-		this.lay_graphs.addContent(this.chk_facet_filter);
+		this.lay_options_graphs.addContent(this.chk_facet_show_graphs);
+		this.lay_options_graphs.addContent(this.chk_facet_filter);
 		
 		this.lay_parameters.addContent(this.but_search);
 	},

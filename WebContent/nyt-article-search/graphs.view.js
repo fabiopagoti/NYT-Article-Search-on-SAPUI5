@@ -22,7 +22,6 @@ sap.ui.jsview("nyt-article-search.graphs", {
 
 		var lay_graphs = new sap.ui.commons.layout.VerticalLayout("lay_graphs");
 		
-
 		var lay_options = new sap.ui.commons.layout.HorizontalLayout();
 
 		var lab_facet = new sap.ui.commons.Label("lab_facet", {
@@ -110,7 +109,6 @@ sap.ui.jsview("nyt-article-search.graphs", {
 
 		pie.setModel(example2);
 
-		// lay1.addContent(pie);
 		lay_graphs.addContent(lay_options);
 		lay_graphs.addContent(pie);
 
