@@ -9,24 +9,15 @@ sap.ui.controller("nyt-article-search.main", {
 	 * @memberOf nyt-article-search.main
 	 */
 
-	article_url : function() {
-		return NYT_Article_Search_app.url_generator.createQuery();
-	},
-
-	articlesModel : {},
 
 	onInit : function() {
 		jQuery.sap.registerModulePath("app", "context");
 		jQuery.sap.require("app");
-
 		
 		this.getView().view_sidebar.attachEvent("search", null, this.reactOnSearch, this); // search event comes from sidebar view
 		
-		this.articlesModel = new sap.ui.model.json.JSONModel(this.article_url()),
-
-		this.articlesModel.attachRequestCompleted(null, this.bindPaginator, this);
-
-		this.articlesModel.attachRequestCompleted(null, this.bindNumberOfHits, this);
+		NYT_Article_Search_app.articlesModel.attachRequestCompleted(null, this.bindPaginator, this);
+		NYT_Article_Search_app.articlesModel.attachRequestCompleted(null, this.bindNumberOfHits, this);
 
 		this.setModels();
 
@@ -64,12 +55,10 @@ sap.ui.controller("nyt-article-search.main", {
 	
 	onPage : function(oControlEvent) {
 		NYT_Article_Search_app.url_generator.page = this.getView().pag_page_number.getCurrentPage() - 1; // page on API starts with zero
-		this.refreshArticlesModel();
+		NYT_Article_Search_app.refreshArticlesModel;
 	},
 
 	reactOnSearch: function(oEvent){
-		this.refreshArticlesModel();
-		this.buildGraphs();
 		this.resetPaginator();
 	},
 	
@@ -77,22 +66,7 @@ sap.ui.controller("nyt-article-search.main", {
 	 * UI Handling
 	 */
 	resetPaginator : function() {
-//		this.url_generator.page = 0;
-		NYT_Article_Search_app.url_generator.page = 0;
 		this.getView().pag_page_number.setCurrentPage(1);
-	},
-
-	buildGraphs : function() {
-		// Graphs on/off
-		if (this.getView().chk_facet_show_graphs.getChecked() == true) {
-			NYT_Article_Search_app.url_generator.setAllFacets();
-		} else {
-			NYT_Article_Search_app.url_generator.removeAllFacets();
-		}
-
-		// facet filter
-
-		NYT_Article_Search_app.url_generator.facet_filter = this.getView().chk_facet_filter.getChecked();
 	},
 
 	/*
@@ -125,19 +99,16 @@ sap.ui.controller("nyt-article-search.main", {
 	 * Model util
 	 */
 
-	refreshArticlesModel : function() {
-		this.articlesModel.loadData(this.article_url());
-	},
 
 	setModels : function() {
-		this.getView().tab_articles.setModel(this.articlesModel);
-		this.getView().pag_page_number.setModel(this.articlesModel);
-		this.getView().txv_hits.setModel(this.articlesModel);
-		this.getView().txv_copyright.setModel(this.articlesModel);
+		this.getView().tab_articles.setModel(NYT_Article_Search_app.articlesModel);
+		this.getView().pag_page_number.setModel(NYT_Article_Search_app.articlesModel);
+		this.getView().txv_hits.setModel(NYT_Article_Search_app.articlesModel);
+		this.getView().txv_copyright.setModel(NYT_Article_Search_app.articlesModel);
 	},
 
 	getFromModelNumberOfHits : function() {
-		return this.articlesModel.getProperty("/response/meta/hits");
+		return NYT_Article_Search_app.articlesModel.getProperty("/response/meta/hits");
 	},
 
 	/*

@@ -75,8 +75,6 @@ sap.ui.jsview("nyt-article-search.graphs", {
 			visible : true,
 		});
 
-		var example2 = new sap.ui.model.json.JSONModel("../examples/example2.json");
-
 		var dat = new sap.viz.ui5.data.FlattenedDataset("dat", {
 
 			dimensions : [ new sap.viz.ui5.data.DimensionDefinition({
@@ -107,7 +105,7 @@ sap.ui.jsview("nyt-article-search.graphs", {
 			dataset : dat,
 		});
 
-		pie.setModel(example2);
+		pie.setModel(NYT_Article_Search_app.articlesModel);
 
 		lay_graphs.addContent(lay_options);
 		lay_graphs.addContent(pie);
