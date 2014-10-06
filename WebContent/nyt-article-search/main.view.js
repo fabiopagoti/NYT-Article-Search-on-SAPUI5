@@ -13,8 +13,7 @@ sap.ui.jsview("nyt-article-search.main", {
 	* @memberOf nyt-article-search.main
 	*/ 
 	createContent : function(oController) {
-		
-		
+	
 		this.createLayouts(oController);
 		
 		/*

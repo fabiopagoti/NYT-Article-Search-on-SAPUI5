@@ -26,6 +26,8 @@ sap.ui.jsview("nyt-article-search.sidebar", {
 		
 		this.addControlsToLayouts(oController);
 		
+		this.attachEvents(oController);
+		
 		return this.lay_sidebar;
 
 	},

@@ -5,9 +5,10 @@ sap.ui.controller("nyt-article-search.sidebar", {
 * Can be used to modify the View before it is displayed, to bind event handlers and do other one-time initialization.
 * @memberOf nyt-article-search.sidebar
 */
-//	onInit: function() {
-//
-//	},
+	onInit: function() {
+		jQuery.sap.registerModulePath("app", "context");
+		jQuery.sap.require("app");
+	},
 
 /**
 * Similar to onAfterRendering, but this hook is invoked before the controller's View is re-rendered
@@ -41,16 +42,11 @@ sap.ui.controller("nyt-article-search.sidebar", {
 	 */
 	
 	onSearch: function(event){
-		this.url_generator.q = this.getView().txf_query.getValue();
-		this.url_generator.begin_date = this.getView().dtp_begin_date.getYyyymmdd();;
-		this.url_generator.end_date = this.getView().dtp_end_date.getYyyymmdd();;
-		this.url_generator.sort = this.getView().cob_sort.getSelectedKey();
-		
-		this.buildGraphs();
-		this.resetPaginator();
-		
-		this.refreshArticlesModel();
-		
+		NYT_Article_Search_app.url_generator.q = this.getView().txf_query.getValue();
+		NYT_Article_Search_app.url_generator.begin_date = this.getView().dtp_begin_date.getYyyymmdd();;
+		NYT_Article_Search_app.url_generator.end_date = this.getView().dtp_end_date.getYyyymmdd();;
+		NYT_Article_Search_app.url_generator.sort = this.getView().cob_sort.getSelectedKey();
+		this.getView().fireEvent("search", null);
 	},
 
 });
