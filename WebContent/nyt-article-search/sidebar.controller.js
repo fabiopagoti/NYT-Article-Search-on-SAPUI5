@@ -62,7 +62,6 @@ sap.ui.controller("nyt-article-search.sidebar", {
 
 		// facet filter
 		NYT_Article_Search_app.url_generator.facet_filter = this.getView().chk_facet_filter.getChecked();
-
 		NYT_Article_Search_app.url_generator.page = 0;
 		
 		NYT_Article_Search_app.refreshArticlesModel();
