@@ -117,7 +117,7 @@ sap.ui.jsview("nyt-article-search.sidebar", {
 		});
 
 		this.txf_api_key = new sap.ui.commons.TextField("txf_api_key", {
-			value : "9753c12656e96dca754d7b875494dc9c:14:68901588",
+			value : "bn4Oil58pGPpRsEUPs24SBDGO5GH8Bqi",
 			required : true,
 			editable : false
 		});
